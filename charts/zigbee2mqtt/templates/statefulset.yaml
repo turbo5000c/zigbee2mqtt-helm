@@ -78,9 +78,9 @@ spec:
         - name: data-volume
           emptyDir: { }
         {{- end }}
-      {{- if .Values.additionalVolumes }}
-        {{- .Values.additionalVolumes | toYaml | nindent 6 }}
-      {{- end }}
+        {{- if .Values.additionalVolumes }}
+          {{- .Values.additionalVolumes | toYaml | nindent 8 }}
+        {{- end }}
   {{- if .Values.statefulset.storage.enabled }}
   volumeClaimTemplates:
   - metadata:
