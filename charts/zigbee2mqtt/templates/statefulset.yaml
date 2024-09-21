@@ -26,10 +26,6 @@ spec:
       affinity:
 {{ toYaml . | indent 8 }}
 {{- end }}
-      nodeSelector:
-{{- with .Values.statefulset.nodeSelector }}
-{{ toYaml . | indent 8 }}
-{{- end }}
       securityContext:
         seccompProfile:
           type: RuntimeDefault
@@ -69,7 +65,10 @@ spec:
             {{- if .Values.additionalMounts }}
               {{- .Values.additionalMounts | toYaml | nindent 12 }}
             {{- end }}
-          resources: {{- toYaml .Values.statefulset.resources | nindent 12 }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
       volumes:
         - name: config-volume
           configMap:
