@@ -78,7 +78,6 @@ spec:
         - name: data-volume
           emptyDir: { }
         {{- end }}
-      {{- end }}
       {{- if .Values.additionalVolumes }}
         {{- .Values.additionalVolumes | toYaml | nindent 6 }}
       {{- end }}
